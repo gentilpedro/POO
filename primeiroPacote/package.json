@@ -1,0 +1,12 @@
+{
+  "name": "primeiropacote",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "pedrogentil",
+  "license": "ISC",
+  "description": "primeiro codigo das aulas de POO"
+}
