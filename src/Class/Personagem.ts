@@ -11,5 +11,6 @@ export class Personagem {
     poderAtaque:number = 0; //Poder de ataque é a quantidade de dano que o personagem pode causar
     intelecto:number = 0; //Intelecto é a inteligência do personagem
     armadura:number = 0; //Armadura é a resistência do personagem a ataques
-    energia: number = 100;  //Energia é a quantidade de energia que o personagem tem para treinar 
+    energia: number = 100;
+    xp:number = 0;  //Energia é a quantidade de energia que o personagem tem para treinar 
 };
