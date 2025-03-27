@@ -199,12 +199,11 @@ while (true) {
     }
     else if (opcao === "6") {
 
-        const nome = teclado("Digite o nome do personagem para buscar: ");
 
         const personagem = obterPersonagemPorNome(personagens)
 
         if (!personagem) {
-            console.log(`❌ Personagem ${nome} não encontrado!`);
+            console.log(`❌ Personagem não encontrado!`);
             continue;
         }
 
