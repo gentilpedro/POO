@@ -20,6 +20,15 @@ class Personagem {
     armadura: number = 0;
     energia: number = 100;
     xp: number = 0; // XP começa em 0
+
+    constructor(nome: string = "", nivel: number = 1) {
+        this.nome = nome;
+        this.nivel = nivel;
+        this.energia = 100;
+        this.ataque = 50; 
+        this.defesa = 50;  
+        this.xp = 0;
+    }
 }
 function Titulo(titulo: string) {
     console.log("=".repeat(40))
@@ -27,12 +36,10 @@ function Titulo(titulo: string) {
     console.log("=".repeat(40))
 }
 
-// Função para gerar um número aleatório
 function randomiza(base: number, limite: number) {
     return Math.floor(base + Math.random() * limite - base)
 }
 
-// Função para treinar ataque de um personagem escolhido pelo usuário
 function treinarAtaque() {
     const personagem = obterPersonagemPorNome(personagens);
     if (!personagem) return;
@@ -54,7 +61,6 @@ function treinarAtaque() {
     console.log(`Energia restante: ${personagem.energia}`);
 }
 
-// Função para treinar defesa de um personagem escolhido pelo usuário
 function treinarDefesa() {
     const personagem = obterPersonagemPorNome(personagens);
     if (!personagem) return;
@@ -76,29 +82,84 @@ function treinarDefesa() {
     console.log(`Energia restante: ${personagem.energia}`);
 }
 
-// Função para desafiar um oponente
+// function desafiar(personagem: Personagem, nivelOponente: number) {
+//     console.log(`⚔️ ${personagem.nome} está desafiando um oponente nível ${nivelOponente}...`);
+
+//     // Criando oponente aleatório
+//     const oponente = new Personagem();
+//     oponente.nome = faker.person.firstName();
+//     oponente.nivel = nivelOponente;
+//     oponente.energia = 100;
+//     oponente.ataque = randomiza(110, 150) * nivelOponente;
+//     oponente.defesa = randomiza(120, 200) * nivelOponente;
+
+//     console.log(`👹 Oponente: ${oponente.nome} | Atk: ${oponente.ataque} | Def: ${oponente.defesa} | Energia: ${oponente.energia}`);
+
+//     // Luta até que um dos dois seja derrotado
+//     while (personagem.energia > 5 && oponente.energia > 0) {
+//         const atacante = Math.random() < 0.5 ? personagem : oponente;
+//         const defensor = atacante === personagem ? oponente : personagem;
+
+//         console.log(`🎲 ${atacante.nome} atacará!`);
+
+//         // Dano causado
+//         const dano = atacante.ataque - defensor.defesa;
+//         if (dano > 0) {
+//             defensor.energia -= dano;
+//             console.log(`💥 ${atacante.nome} causou ${dano} de dano em ${defensor.nome}!`);
+//         } else {
+//             console.log(`🛡️ ${defensor.nome} bloqueou o ataque!`);
+//         }
+
+//         // Verificar se alguém foi derrotado
+//         if (defensor.energia <= 0) {
+//             console.log(`💀 ${defensor.nome} foi derrotado!`);
+//             break;
+//         }
+//     }
+
+//     // Caso o herói tenha vencido
+//     if (oponente.energia <= 0) {
+//         personagem.xp += 2 * nivelOponente;
+//         console.log(`🏆 ${personagem.nome} venceu e ganhou ${2 * nivelOponente} XP!`);
+//     }
+//     // Caso o herói tenha perdido
+//     else if (personagem.energia <= 5) {
+//         personagem.xp *= 0.9; // Perde 10% do XP
+//         personagem.energia = 1; // Ajusta energia para mínimo
+//         console.log(`😵 ${personagem.nome} perdeu! XP reduzido para ${personagem.xp.toFixed(2)}.`);
+//     }
+// }
+
+
+function randomizaAtqDef(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 function desafiar(personagem: Personagem, nivelOponente: number) {
     console.log(`⚔️ ${personagem.nome} está desafiando um oponente nível ${nivelOponente}...`);
 
-    // Criando oponente aleatório
     const oponente = new Personagem();
-    oponente.nome = faker.person.firstName();
+    oponente.nome = faker.person.firstName(); 
     oponente.nivel = nivelOponente;
     oponente.energia = 100;
-    oponente.ataque = randomiza(0, 100) * nivelOponente;
-    oponente.defesa = randomiza(0, 100) * nivelOponente;
+    oponente.ataque = randomizaAtqDef(120, 200) * nivelOponente;
+    oponente.defesa = randomizaAtqDef(110, 150) * nivelOponente;
 
     console.log(`👹 Oponente: ${oponente.nome} | Atk: ${oponente.ataque} | Def: ${oponente.defesa} | Energia: ${oponente.energia}`);
 
-    // Luta até que um dos dois seja derrotado
-    while (personagem.energia > 5 && oponente.energia > 0) {
+    let rodada = 0;
+
+    while (rodada < 5 && personagem.energia > 5 && oponente.energia > 0) {
+        rodada++;
+        console.log(`\n🌟 Rodada ${rodada}:`);
+
         const atacante = Math.random() < 0.5 ? personagem : oponente;
         const defensor = atacante === personagem ? oponente : personagem;
 
         console.log(`🎲 ${atacante.nome} atacará!`);
 
-        // Dano causado
-        const dano = atacante.ataque - defensor.defesa;
+        const dano = Math.max(atacante.ataque - defensor.defesa, 0);
         if (dano > 0) {
             defensor.energia -= dano;
             console.log(`💥 ${atacante.nome} causou ${dano} de dano em ${defensor.nome}!`);
@@ -106,25 +167,30 @@ function desafiar(personagem: Personagem, nivelOponente: number) {
             console.log(`🛡️ ${defensor.nome} bloqueou o ataque!`);
         }
 
-        // Verificar se alguém foi derrotado
         if (defensor.energia <= 0) {
             console.log(`💀 ${defensor.nome} foi derrotado!`);
             break;
         }
     }
 
-    // Caso o herói tenha vencido
     if (oponente.energia <= 0) {
         personagem.xp += 2 * nivelOponente;
         console.log(`🏆 ${personagem.nome} venceu e ganhou ${2 * nivelOponente} XP!`);
     }
-    // Caso o herói tenha perdido
+
     else if (personagem.energia <= 5) {
-        personagem.xp *= 0.9; // Perde 10% do XP
-        personagem.energia = 1; // Ajusta energia para mínimo
+        personagem.xp *= 0.9; 
+        personagem.energia = 1; 
         console.log(`😵 ${personagem.nome} perdeu! XP reduzido para ${personagem.xp.toFixed(2)}.`);
     }
+    else if (rodada === 5) {
+        console.log("🤝 Empate! Nenhum dos dois foi derrotado.");
+    }
 }
+
+const heroi = new Personagem("Herói", 1);
+desafiar(heroi, 3);
+
 
 function descansar() {
     const personagem = obterPersonagemPorNome(personagens);
@@ -156,9 +222,6 @@ function descansar() {
     console.log(`Ataque atual: ${personagem.ataque.toFixed(2)}`);
     console.log(`Defesa atual: ${personagem.defesa.toFixed(2)}`);
 }
-
-// Menu principal
-
 
 while (true) {
     Titulo("RPG SENAC")
@@ -197,7 +260,6 @@ while (true) {
 
     }
     else if (opcao === "6") {
-
 
         const personagem = obterPersonagemPorNome(personagens)
 
