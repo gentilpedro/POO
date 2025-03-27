@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import prompt from "prompt-sync";
-import { GerenciadorDePersonagens, obterPersonagemPorNome, criarPersonagem, } from "./ BusPersonagem/GerenciadorDePersonagem";
+import { GerenciadorDePersonagens, obterPersonagemPorNome, criarPersonagem, verFichaPersonagem, } from "./ BusPersonagem/GerenciadorDePersonagem";
 
 const teclado = prompt();
 const personagens: Personagem[] = [];
@@ -204,7 +204,7 @@ while (true) {
         const personagem = obterPersonagemPorNome(personagens)
 
         if (!personagem) {
-            console.log(`❌ Personagem ${nome} não encontrado!`);
+            console.log(`❌ Personagem não encontrado!`);
             continue;
         }
 
@@ -214,9 +214,7 @@ while (true) {
         desafiar(personagem, nivelOponente);
 
     } else if (opcao === "7") {
-        const nomePersonagem = teclado("Digite o nome do personagem: ");
-        gerenciadorPersonagem.verFichaPersonagem(nomePersonagem);
-
+        verFichaPersonagem(personagens)
     } else if (opcao === "8") {
         console.log("Saindo...");
         break;
