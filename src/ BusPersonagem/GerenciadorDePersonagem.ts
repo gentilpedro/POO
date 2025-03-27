@@ -3,34 +3,6 @@ import prompt from "prompt-sync"
 
 const teclado = prompt();
 
-export class GerenciadorDePersonagens {
-    
-    private personagens: Personagem[] = [];
-
-    adicionarPersonagem(personagem: Personagem): void {
-        this.personagens.push(personagem);
-        console.log(`Personagem ${personagem.nome} adicionado com sucesso!`);
-    };
-
-    listarPersonagens(): void {
-        if (this.personagens.length <= 0) {
-            console.log("Nenhum personagem cadastrado.");
-            return;
-        }
-        console.log("Lista de personagens:");
-        this.personagens.forEach((p, index) => {
-            console.log(`${index + 1}. ${p.nome} - ${p.classe} - ${p.raca}`);
-        });
-    };
-
-    obterPersonagens(): Personagem[] {
-        return this.personagens;
-    };
-
-
-};
-
-  // Função para buscar personagem por nome
   export function obterPersonagemPorNome(personagens: Personagem[]): Personagem | null {
     const nome = teclado("Digite o nome do personagem: ");
     const personagem = personagens.find(p => p.nome.toLowerCase() === nome.toLowerCase());

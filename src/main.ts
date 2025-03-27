@@ -1,10 +1,9 @@
 import { faker } from "@faker-js/faker";
 import prompt from "prompt-sync";
-import { GerenciadorDePersonagens, obterPersonagemPorNome, criarPersonagem, verFichaPersonagem, } from "./ BusPersonagem/GerenciadorDePersonagem";
+import {  obterPersonagemPorNome, criarPersonagem, verFichaPersonagem, } from "./ BusPersonagem/GerenciadorDePersonagem";
 
 const teclado = prompt();
 const personagens: Personagem[] = [];
-const gerenciadorPersonagem = new GerenciadorDePersonagens();
 
 class Personagem {
     nome: string = "";
