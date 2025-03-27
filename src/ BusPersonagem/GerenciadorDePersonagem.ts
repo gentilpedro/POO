@@ -13,7 +13,7 @@ export class GerenciadorDePersonagens {
     };
 
     listarPersonagens(): void {
-        if (this.personagens.length === 0) {
+        if (this.personagens.length <= 0) {
             console.log("Nenhum personagem cadastrado.");
             return;
         }

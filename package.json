@@ -10,12 +10,15 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@types/prompt-sync": "^4.2.3",
-    "typescript": "^5.8.2"
+    "@types/prompt-sync": "^4.2.3"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.6.0",
+    "@types/express": "^5.0.1",
+    "@types/node": "^22.13.14",
     "prompt-sync": "^4.2.0",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.2"
   }
 }

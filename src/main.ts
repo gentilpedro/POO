@@ -5,7 +5,7 @@ import { GerenciadorDePersonagens, obterPersonagemPorNome, criarPersonagem, } fr
 const teclado = prompt();
 const personagens: Personagem[] = [];
 const gerenciadorPersonagem = new GerenciadorDePersonagens();
-// Classe do Personagem
+
 class Personagem {
     nome: string = "";
     nivel: number = 0;
@@ -86,8 +86,8 @@ function desafiar(personagem: Personagem, nivelOponente: number) {
     oponente.nome = faker.person.firstName();
     oponente.nivel = nivelOponente;
     oponente.energia = 100;
-    oponente.ataque = randomiza(120, 200) * nivelOponente;
-    oponente.defesa = randomiza(110, 150) * nivelOponente;
+    oponente.ataque = randomiza(0, 100) * nivelOponente;
+    oponente.defesa = randomiza(0, 100) * nivelOponente;
 
     console.log(`👹 Oponente: ${oponente.nome} | Atk: ${oponente.ataque} | Def: ${oponente.defesa} | Energia: ${oponente.energia}`);
 
